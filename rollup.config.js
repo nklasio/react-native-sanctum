@@ -15,9 +15,7 @@ export default [
       "react",
       "axios",
       "tiny-invariant",
-      "async-storage",
       "@react-native-async-storage/async-storage",
-      "AsyncStorage",
     ],
     plugins: [json(), typescript()],
     output: [
