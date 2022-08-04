@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import axios, { AxiosInstance } from "axios";
 import SanctumContext from "./SanctumContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 axios.defaults.withCredentials = true;
 
@@ -69,6 +70,9 @@ const Sanctum: React.FC<Props> = ({ checkOnInit = true, config, children }) => {
             maxRedirects: 0,
           }
         );
+        AsyncStorage.setItem("@token", signInData).catch((error) =>
+          console.error(error)
+        );
 
         // Handle two factor.
         if (typeof signInData === "object" && signInData.two_factor === true) {
@@ -95,10 +99,12 @@ const Sanctum: React.FC<Props> = ({ checkOnInit = true, config, children }) => {
       try {
         // The user can either use their OTP token or use a recovery code.
         const formData = recovery ? { recovery_code: code } : { code };
+        const token = await AsyncStorage.getItem("@token");
 
         await localAxiosInstance.post(
           `${apiUrl}/${twoFactorChallengeRoute}`,
-          formData
+          formData,
+          { headers: { Authorization: `Bearer ${token}` } }
         );
 
         // Fetch user.
@@ -116,7 +122,11 @@ const Sanctum: React.FC<Props> = ({ checkOnInit = true, config, children }) => {
 
     return new Promise<void>(async (resolve, reject) => {
       try {
-        await localAxiosInstance.post(`${apiUrl}/${signOutRoute}`);
+        const token = await AsyncStorage.getItem("@token");
+
+        await localAxiosInstance.post(`${apiUrl}/${signOutRoute}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         // Only sign out after the server has successfully responded.
         setSanctumState({ user: null, authenticated: false });
         resolve();
@@ -135,10 +145,12 @@ const Sanctum: React.FC<Props> = ({ checkOnInit = true, config, children }) => {
       const { apiUrl, userObjectRoute } = config;
 
       try {
+        const token = await AsyncStorage.getItem("@token");
         const { data } = await localAxiosInstance.get(
           `${apiUrl}/${userObjectRoute}`,
           {
             maxRedirects: 0,
+            headers: { Authorization: `Bearer ${token}` },
           }
         );
 
