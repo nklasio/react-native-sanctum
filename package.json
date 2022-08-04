@@ -1,7 +1,7 @@
 {
-  "name": "react-sanctum",
-  "version": "2.2.0",
-  "description": "Easily hook up your React app to Laravel Sanctum",
+  "name": "react-native-sanctum",
+  "version": "3.0.0",
+  "description": "Easily hook up your React-Native app to Laravel Sanctum",
   "main": "build/index.cjs.ts",
   "module": "build/index.esm.js",
   "types": "build/index.d.ts",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/koole/react-sanctum.git"
+    "url": "git+https://github.com/nklasio/react-natice-sanctum.git"
   },
   "keywords": [
     "react",
@@ -38,13 +38,12 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "@react-native-async-storage/async-storage": "^1.17.7",
     "axios": "^0.27.2"
   },
   "peerDependencies": {
     "react": "^16.13.0 || ^17.0.0",
     "react-dom": "^16.13.0 || ^17.0.0",
-    "react-native": "^0.0.0-0 ||  1000.0.0"
+    "react-native": "^0.68.2"
   },
   "files": [
     "build"
