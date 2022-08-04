@@ -1,6 +1,6 @@
 {
   "name": "react-native-sanctum",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Easily hook up your React-Native app to Laravel Sanctum",
   "main": "build/index.cjs.ts",
   "module": "build/index.esm.js",

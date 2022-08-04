@@ -124,9 +124,13 @@ const Sanctum: React.FC<Props> = ({ checkOnInit = true, config, children }) => {
       try {
         const token = await AsyncStorage.getItem("@token");
 
-        await localAxiosInstance.post(`${apiUrl}/${signOutRoute}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        await localAxiosInstance.post(
+          `${apiUrl}/${signOutRoute}`,
+          {},
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         // Only sign out after the server has successfully responded.
         setSanctumState({ user: null, authenticated: false });
         resolve();

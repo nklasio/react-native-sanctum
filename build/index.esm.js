@@ -95,7 +95,7 @@ const Sanctum = ({ checkOnInit = true, config, children }) => {
         return new Promise((resolve, reject) => __awaiter(void 0, void 0, void 0, function* () {
             try {
                 const token = yield AsyncStorage.getItem("@token");
-                yield localAxiosInstance.post(`${apiUrl}/${signOutRoute}`, {
+                yield localAxiosInstance.post(`${apiUrl}/${signOutRoute}`, {}, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 // Only sign out after the server has successfully responded.
