@@ -1,4 +1,3 @@
-
 import json from "@rollup/plugin-json";
 import typescript from "rollup-plugin-typescript2";
 import pkg from "./package.json";
@@ -12,11 +11,18 @@ export default [
   // `file` and `format` for each target)
   {
     input: "src/index.ts",
-    external: ["react", "axios", "tiny-invariant"],
+    external: [
+      "react",
+      "axios",
+      "tiny-invariant",
+      "async-storage",
+      "@react-native-async-storage/async-storage",
+      "AsyncStorage",
+    ],
     plugins: [json(), typescript()],
     output: [
       { file: pkg.main, format: "cjs", sourcemap: true },
-      { file: pkg.module, format: "es", sourcemap: true }
-    ]
-  }
+      { file: pkg.module, format: "es", sourcemap: true },
+    ],
+  },
 ];
